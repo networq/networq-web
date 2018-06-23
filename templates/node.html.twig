@@ -95,7 +95,7 @@
               <li>{{ property.getField().getName() }}
                 {% if property.field.isNodeType() %}
                   {% if property.getValueRaw() %}
-                  <a href="{{ path('node_view', {'fqnn': property.getValueRaw() } ) }}">
+                  <a href="{{ path('node', {'fqnn': property.getValueRaw() } ) }}">
                     {{ property.getValueRaw() }}
                   </a>
                   {% endif %}
@@ -106,7 +106,7 @@
                   <ul>
                   {% for n in property.getValue() %}
                     <li>
-                      <a href="{{ path('node_view', {'fqnn': n.getFqnn() } ) }}">
+                      <a href="{{ path('node', {'fqnn': n.getFqnn() } ) }}">
                         {{ n.getFqnn() }}
                       </a>
                     </li>
@@ -142,7 +142,7 @@
             <ul>
             {% for node in type.getNodes() %}
               <li>
-                <a href="{{ path('node_view', {'fqpn': fqpn, 'fqnn': node.getFqnn() } ) }}">
+                <a href="{{ path('node', {'fqpn': fqpn, 'fqnn': node.getFqnn() } ) }}">
                   {{ node.getFqnn() }}
                 </a>
               </li>
