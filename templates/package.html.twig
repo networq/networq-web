@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+  <div class="container">
+    <h1><i class="fa fa-book"></i> {{ package.getName() }}</h1>
+
+    <h3>Types:</h3>
+    <ul>
+    {% for type in package.getTypes() %}
+      <li>{{ type|typeButton|raw }}</li>
+    {% endfor %}
+    </ul>
+    Generate <a href="{{ path('package_readme', { 'fqpn': package.getName() } ) }}">README.md</a>
+  </div>
+{% endblock %}

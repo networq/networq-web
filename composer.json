@@ -1,0 +1,45 @@
+{
+    "name": "networq/networq-web",
+    "description": "Web-based Networq browser",
+    "homepage": "http://www.github.com/networq/networq-web",
+    "keywords": ["networq", "graph", "modeling", "linkorb"],
+    "type": "application",
+    "authors": [
+        {
+            "name": "LinkORB Engineering",
+            "email": "engineering@linkorb.com",
+            "role": "Development"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "networq/networq": "^1.0",
+        "symfony/yaml": "^4.0",
+        "symfony/dotenv": "^4.0",
+        "twig/twig": "^1.0",
+
+        "sensio/framework-extra-bundle": "^5.1",
+        "symfony/asset": "^4.0",
+        "symfony/flex": "^1.0",
+        "symfony/form": "^4.0",
+        "symfony/framework-bundle": "^4.0",
+        "symfony/lts": "^4@dev",
+        "symfony/twig-bundle": "^4.0",
+        "symfony/webpack-encore-pack": "*"
+    },
+    "require-dev": {
+        "linkorb/autotune": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
+    }
+}

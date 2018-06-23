@@ -1,0 +1,156 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+  <div class="jumbotron">
+    <div class="container">
+      <div class="row align-items-end">
+        <div class="col-md-3">
+          <div class="image">
+            <img style="width: 100%; max-width: 200px;"
+              src="{{ node['networq:core:node']['image']|default('https://placeidentity.gr/wp-content/themes/aloom/assets/images/default.jpg') }}"
+              class="img img-responsive full-width" />
+          </div>
+        </div>
+        <div class="col-md-9">
+            {% if node['networq:core:node'] is defined %}
+              <h1>
+                <i class="fa fa-circle"></i>
+                {{ node['networq:core:node']['name'] }}</h1>
+              <p class="lead">{{ node['networq:core:node']['description'] }}</p>
+            {% endif %}
+            {{ node|nodeButton|raw }}<br />
+            {% for tag in node.getTags() %}
+              {{ tag.getType()|typeButton|raw }}
+            {% endfor %}<br />
+
+            {{ node.getPackage()|packageButton|raw }}<br />
+            {% if node['networq:core:node'] is defined and node['networq:core:node']['url'] %}
+              <i class="fa fa-link"></i>
+                <a href="{{ node['networq:core:node']['url'] }}" target="_blank">
+                {{ node['networq:core:node']['url'] }}</a>
+              <br />
+            {% endif %}
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="container" style="padding-top: 0px;">
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card bg-secondary text-white">
+          <div class="card-header">Properties</div>
+          <div class="card-body">
+            {% for widget in widgets.properties %}
+              <h5>{{ widget.getLabel() }}</h5>
+              {% include  widget.getTemplateName() %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#about">About</a>
+          </li>
+
+
+          {% for widget in widgets.tabs %}
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#{{ widget.getName() }}">{{ widget.getLabel() }}</a>
+            </li>
+          {% endfor %}
+
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#debug">Debug</a>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent" style="margin-top: 15px;">
+          <div class="tab-pane show active" id="about">
+            {% if node['networq:core:node'] is defined %}
+            <h3>Details:</h3>
+            <pre>{{ node['networq:core:node']['details'] }}</pre>
+            {% endif %}
+          </div>
+          {% for widget in widgets.tabs %}
+          <div class="tab-pane show" id="{{ widget.getName() }}">
+            {% include  widget.getTemplateName() %}
+          </div>
+
+          {% endfor %}
+
+          <div class="tab-pane show" id="debug">
+            <h3>Tags:</h3>
+
+
+            {% for tag in node.getTags() %}
+            <h4><i class="fa fa-cube"></i> {{ tag.getType().getFqtn() }}</h4>
+
+            <ul>
+            {% for property in tag.getProperties() %}
+              <li>{{ property.getField().getName() }}
+                {% if property.field.isNodeType() %}
+                  {% if property.getValueRaw() %}
+                  <a href="{{ path('node_view', {'fqnn': property.getValueRaw() } ) }}">
+                    {{ property.getValueRaw() }}
+                  </a>
+                  {% endif %}
+                (nodetype {{ property.getField().getType() }})
+                {% endif %}
+
+                {% if property.field.isNodeListType() %}
+                  <ul>
+                  {% for n in property.getValue() %}
+                    <li>
+                      <a href="{{ path('node_view', {'fqnn': n.getFqnn() } ) }}">
+                        {{ n.getFqnn() }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                  </ul>
+                {% endif %}
+
+                {% if property.field.isString() %}
+                  <code>{{ property.getValueString() }}</code> (string)
+                {% endif %}
+
+              </li>
+            {% endfor %}
+            </ul>
+
+            {% endfor %}
+
+            <h4>Widgets</h4>
+            <ul>
+            {% for name, widgets in widgets %}
+              <li>
+                {{ name }}: <small>{{ widgets|length }}</small>
+                <ul>
+                {% for widget in widgets %}
+                  <li>{{ widget.name }}</li>
+                {% endfor %}
+                </ul>
+              </li>
+            {% endfor %}
+            </ul>
+
+            {# <h3>Nodes:</h3>
+            <ul>
+            {% for node in type.getNodes() %}
+              <li>
+                <a href="{{ path('node_view', {'fqpn': fqpn, 'fqnn': node.getFqnn() } ) }}">
+                  {{ node.getFqnn() }}
+                </a>
+              </li>
+            {% endfor %}
+            </ul> #}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

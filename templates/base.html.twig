@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('build/css/app.css') }}" />
+    {# <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"> #}
+
+    <script src="https://use.fontawesome.com/a1b5e5147d.js"></script>
+
+    <style>
+      body {
+        overflow-y:scroll;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm bg-dark">
+      <div class="container" style="padding-left: 5px;">
+        <a class="nav-link" href="{{ path('frontpage') }}" style="color: #ffffff;"><i class="fa fa-home"></i> Networq</a>
+      </div>
+    </nav>
+
+
+    <nav class="navbar navbar-expand-sm navbar-toggleable-md navbar-light">
+      <div class="container">
+
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <ul class="navbar-nav">
+            {% if graph is defined %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('frontpage') }}"><i class="fa fa-sitemap"></i> {{ graph.getRootPackage().getName() }}</a>
+            </li>
+            {% for node in graph.getRootPackage.getNavNodes() %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ node|nodePath }}"><i class="fa fa-circle"></i> {{ node['networq:core:node']['name'] }}</a>
+            </li>
+            {% endfor %}
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                <i class="fa fa-cube"></i> Types
+              </a>
+              <div class="dropdown-menu" style="min-width: 20rem;">
+              {% for package in graph.getPackages() %}
+                {# <div class="dropdown-divider"></div> #}
+                <a class="nav-link"  class="dropdown-item" href="{{ path('package', { 'fqpn': package.name } ) }}"><i class="fa fa-book"></i>&nbsp;{{ package.name }}</a>
+                {% for type in package.getTypes() %}
+                 <a class="nav-link"  class="dropdown-item" href="{{ path('type', { 'fqtn': type.fqtn } ) }}"><div style="margin-left: 20px;"><i class="fa fa-cube"></i> {{ type.name }}</div></a>
+                {% endfor %}
+              {% endfor %}
+              </div>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <script src="{{ asset('build/js/app.js') }}"></script>
+  </body>
+</html>

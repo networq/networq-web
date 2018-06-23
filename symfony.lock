@@ -1,0 +1,119 @@
+{
+    "doctrine/annotations": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "cb4152ebcadbe620ea2261da1a1c5a9b8cea7672"
+        }
+    },
+    "doctrine/cache": {
+        "version": "v1.7.1"
+    },
+    "doctrine/collections": {
+        "version": "v1.5.0"
+    },
+    "doctrine/common": {
+        "version": "v2.8.1"
+    },
+    "doctrine/lexer": {
+        "version": "v1.0.1"
+    },
+    "networq/networq": {
+        "version": "v1.0.0"
+    },
+    "psr/cache": {
+        "version": "1.0.1"
+    },
+    "psr/simple-cache": {
+        "version": "1.0.1"
+    },
+    "sensio/framework-extra-bundle": {
+        "version": "4.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.0",
+            "ref": "aaddfdf43cdecd4cf91f992052d76c2cadc04543"
+        }
+    },
+    "symfony/asset": {
+        "version": "v4.1.0"
+    },
+    "symfony/cache": {
+        "version": "v4.1.0"
+    },
+    "symfony/config": {
+        "version": "v4.1.0"
+    },
+    "symfony/dependency-injection": {
+        "version": "v4.1.0"
+    },
+    "symfony/filesystem": {
+        "version": "v4.1.0"
+    },
+    "symfony/finder": {
+        "version": "v4.1.0"
+    },
+    "symfony/flex": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "cc1afd81841db36fbef982fe56b48ade6716fac4"
+        }
+    },
+    "symfony/form": {
+        "version": "v4.1.0"
+    },
+    "symfony/framework-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "c0c0bf94174609d740ca2a61e0201949c5683d50"
+        }
+    },
+    "symfony/inflector": {
+        "version": "v4.1.0"
+    },
+    "symfony/intl": {
+        "version": "v4.1.0"
+    },
+    "symfony/lts": {
+        "version": "4-dev"
+    },
+    "symfony/options-resolver": {
+        "version": "v4.1.0"
+    },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.8.0"
+    },
+    "symfony/property-access": {
+        "version": "v4.1.0"
+    },
+    "symfony/twig-bridge": {
+        "version": "v4.1.0"
+    },
+    "symfony/twig-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "f75ac166398e107796ca94cc57fa1edaa06ec47f"
+        }
+    },
+    "symfony/webpack-encore-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "0e8ef1deeaef761e1defbec0be694237660ab13a"
+        }
+    }
+}

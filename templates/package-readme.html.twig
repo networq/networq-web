@@ -1,0 +1,21 @@
+{{ package.getName}}
+====
+
+This is the "{{ package.getName}}" package for [NetworQ](https://github.com/networq).
+
+{% if package.getTypes() %}
+## Types
+
+This package defines the following types that you can use in your own Networq:
+
+{% for type in package.getTypes() %}
+### {{ type.fqtn }} type
+
+Fields:
+
+{% for field in type.getFields() %}
+  * `{{ field.getName() }}`: *{{ field.getType() }}*
+{% endfor %}
+
+{% endfor %}
+{% endif %}

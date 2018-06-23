@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+  <div class="container">
+    <h1><i class="fa fa-cube"></i> {{ type.fqtn }}</h1>
+    {# <p class="lead">{{ type.getDescription() }}</p> #}
+    {{ type.getPackage()|packageButton|raw }}
+    <h3>Fields:</h3>
+    <ul>
+    {% for field in type.getFields() %}
+      <li>{{ field.getName() }} <code>{{ field.getType() }}</code></li>
+    {% endfor %}
+    </ul>
+
+    <h3>Nodes:</h3>
+    <ul>
+    {% for node in type.getNodes() %}
+      <li>
+        {{ node|nodeButton|raw }}
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
