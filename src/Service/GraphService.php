@@ -3,9 +3,6 @@
 namespace App\Service;
 
 use Networq\Loader\GraphLoader;
-use App\Model\GraphDefinition;
-use Symfony\Component\Yaml\Yaml;
-
 class GraphService
 {
     protected $graph;
