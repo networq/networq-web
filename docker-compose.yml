@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  nginx:
+    build: ./docker/nginx
+    depends_on:
+      - php-fpm
+    working_dir: /var/www/html
+    volumes_from:
+      - php-fpm
+    ports:
+     - "80:80"
+
+  php-fpm:
+    build: ./docker/php-fpm
+    user: www-data
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html:cached
