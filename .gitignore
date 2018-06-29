@@ -7,6 +7,9 @@ tmp/
 local.properties
 .settings/
 
+### PhpStorm ###
+.idea/
+
 ### NetBeans ###
 nbproject/private/
 nbbuild/
