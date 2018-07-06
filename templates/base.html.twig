@@ -39,7 +39,7 @@
           <ul class="navbar-nav">
             {% if graph is defined %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ path('frontpage') }}"><i class="fa fa-sitemap"></i> {{ graph.getRootPackage().getName() }}</a>
+              <a class="nav-link" href="{{ path('frontpage') }}"><i class="fa fa-sitemap"></i> {{ graph.getRootPackage().getFqpn() }}</a>
             </li>
             {% for node in graph.getRootPackage.getNavNodes() %}
             <li class="nav-item">
@@ -54,7 +54,7 @@
               <div class="dropdown-menu" style="min-width: 20rem;">
               {% for package in graph.getPackages() %}
                 {# <div class="dropdown-divider"></div> #}
-                <a class="nav-link"  class="dropdown-item" href="{{ path('package', { 'fqpn': package.name } ) }}"><i class="fa fa-book"></i>&nbsp;{{ package.name }}</a>
+                <a class="nav-link"  class="dropdown-item" href="{{ path('package', { 'fqpn': package.fqpn } ) }}"><i class="fa fa-book"></i>&nbsp;{{ package.fqpn }}</a>
                 {% for type in package.getTypes() %}
                  <a class="nav-link"  class="dropdown-item" href="{{ path('type', { 'fqtn': type.fqtn } ) }}"><div style="margin-left: 20px;"><i class="fa fa-cube"></i> {{ type.name }}</div></a>
                 {% endfor %}

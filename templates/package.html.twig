@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="container">
-    <h1><i class="fa fa-book"></i> {{ package.getName() }}</h1>
+    <h1><i class="fa fa-book"></i> {{ package.getFqpn() }}</h1>
 
     <h3>Types:</h3>
     <ul>
@@ -10,6 +10,6 @@
       <li>{{ type|typeButton|raw }}</li>
     {% endfor %}
     </ul>
-    Generate <a href="{{ path('package_readme', { 'fqpn': package.getName() } ) }}">README.md</a>
+    Generate <a href="{{ path('package_readme', { 'fqpn': package.getFqpn() } ) }}">README.md</a>
   </div>
 {% endblock %}
