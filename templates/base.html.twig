@@ -18,6 +18,11 @@
     <nav class="navbar navbar-expand-sm bg-dark">
       <div class="container" style="padding-left: 5px;">
         <a class="nav-link" href="{{ path('frontpage') }}" style="color: #ffffff;"><i class="fa fa-home"></i> Networq</a>
+
+        <form class="form-inline" action="{{ path('search') }}" method="post">
+          <input name="query" type="text" style="width: 300px;" class="form-control" placeholder="search..." />
+          <button type="submit" class="btn btn-info">Search</button>
+        </form>
       </div>
     </nav>
 

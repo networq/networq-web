@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\GraphService;
@@ -25,6 +26,30 @@ class AppController extends AbstractController
             'graph' => $graph,
         ];
         return $this->render('graph.html.twig', $data);
+    }
+
+     /**
+     * @Route("/search", name="search")
+     */
+    public function search(Request $request)
+    {
+        $graph = $this->graphService->getGraph();
+        $query = strtolower($request->request->get('query'));
+        $nodes = $graph->getNodes();
+        $res = [];
+        foreach ($nodes as $node) {
+            if ($node->hasTag('networq:core:node')) {
+                $name = strtolower($node['networq:core:node']['name']);
+                if (strpos($name, $query) !== false) {
+                    $res[] = $node;
+                }
+            }
+        }
+        $data = [
+            'graph' => $graph,
+            'nodes' => $res,
+        ];
+        return $this->render('search.html.twig', $data);
     }
 
     /**
