@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+  {# <div class="jumbotron">
+    <div class="container">
+      <div class="row align-items-end">
+        <div class="col-md-3">
+          <div class="image">
+            <img style="width: 100%; max-width: 200px;"
+              src="{{ node['networq:core:node']['image']|default('https://placeidentity.gr/wp-content/themes/aloom/assets/images/default.jpg') }}"
+              class="img img-responsive full-width" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> #}
+  <div class="container">
+    <h1>{{ node.getFqnn() }}</h1>
+    <div class="row">
+      <div class="col-md-3">
+        {% for type in types %}
+          <label>
+            <input type="checkbox" {% if node.hasTag(type.fqtn) %}checked{% endif %} />
+            {{ type.getFqtn }}
+          </label>
+
+        {% endfor %}
+      </div>
+      <div class="col-md-9">
+
+        {% for type in types %}
+          <fieldset id="{{ type.fqtn }}" {% if not node.hasTag(type.fqtn) %}style="display: none;"{% endif %}>
+            <legend>{{ type.fqtn }}</legend>
+            {% for field in type.fields %}
+              <label>{{ field.name }}</label>
+              <div class="input-group">
+                <input type="text" class="form-control" />
+              </div>
+            {% endfor %}
+          </fieldset>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

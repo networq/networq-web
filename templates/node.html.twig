@@ -30,6 +30,12 @@
                 {{ node['networq:core:node']['url'] }}</a>
               <br />
             {% endif %}
+            {% if node.isEditable() %}
+            <br />
+            <a class="btn btn-secondary btn-sm" href="{{ path('node_yaml', {'fqnn': node.fqnn } ) }}">Edit YAML</a>
+            <a class="btn btn-secondary btn-sm" href="{{ path('node_edit', {'fqnn': node.fqnn } ) }}">Edit UI</a>
+            {% endif %}
+
           </div>
         </div>
       </div>

@@ -20,6 +20,9 @@
     "doctrine/lexer": {
         "version": "v1.0.1"
     },
+    "linkorb/connector": {
+        "version": "v1.0.0"
+    },
     "networq/networq": {
         "version": "v1.0.0"
     },

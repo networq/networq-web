@@ -64,6 +64,7 @@ class AppController extends AbstractController
         return $this->render($filename, $data);
     }
 
+        $graph = $this->graphService->getGraph();
     /**
      * @Route("/packages/{fqpn}", name="package")
      */
