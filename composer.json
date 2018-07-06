@@ -29,7 +29,8 @@
         "symfony/webpack-encore-pack": "*"
     },
     "require-dev": {
-        "linkorb/autotune": "^1.0"
+        "linkorb/autotune": "^1.0",
+        "phpro/grumphp": "^0.14.1"
     },
     "autoload": {
         "psr-4": {
