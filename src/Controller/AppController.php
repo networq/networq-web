@@ -22,6 +22,7 @@ class AppController extends AbstractController
     public function graph()
     {
         $graph = $this->graphService->getGraph();
+
         $data = [
             'graph' => $graph,
         ];
@@ -89,7 +90,60 @@ class AppController extends AbstractController
         return $this->render($filename, $data);
     }
 
+    /**
+     * @Route("/nodes/{fqnn}/edit", name="node_edit")
+     */
+    public function nodeEdit($fqnn)
+    {
         $graph = $this->graphService->getGraph();
+        $node = $graph->getNode($fqnn);
+
+        // $widgets = [
+        //     'properties' => $graph->getNodeWidgets($node, 'properties'),
+        //     'tabs' => $graph->getNodeWidgets($node, 'tabs'),
+        // ];
+        $types = $graph->getTypes();
+
+        $data = [
+            'node' => $node,
+            'graph' => $graph,
+            'types' => $types,
+        ];
+
+        $filename = 'node_edit.html.twig';
+        return $this->render($filename, $data);
+    }
+
+    /**
+     * @Route("/nodes/{fqnn}/yaml", name="node_yaml")
+     */
+    public function nodeYaml(Request $request, $fqnn)
+    {
+        $graph = $this->graphService->getGraph();
+        if ($request->getMethod()=='POST') {
+            $yaml = $request->request->get('yaml');
+            $graph->persist($fqnn, $yaml);
+            return $this->redirectToRoute('node', ['fqnn' => $fqnn]);
+        }
+        $yaml = null;
+        if ($graph->hasNode($fqnn)) {
+            $node = $graph->getNode($fqnn);
+            $yaml = $node->toYaml();
+        }
+
+
+        $types = $graph->getTypes(); // for inline help?
+        $data = [
+            'fqnn' => $fqnn,
+            'graph' => $graph,
+            'types' => $types,
+            'yaml' => $yaml,
+        ];
+
+        $filename = 'node_yaml.html.twig';
+        return $this->render($filename, $data);
+    }
+
     /**
      * @Route("/packages/{fqpn}", name="package")
      */
