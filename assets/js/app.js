@@ -15,3 +15,11 @@ require('bootstrap');
 // $(document).ready(function() {
 //     $('[data-toggle="popover"]').popover();
 // });
+
+import '@linkorb/brace-helper'; // auto initialize ace editors
+
+// import any modes or themes you'd like to use in your app
+import 'brace/mode/javascript';
+import 'brace/mode/css';
+import 'brace/mode/yaml';
+import 'brace/theme/monokai';
