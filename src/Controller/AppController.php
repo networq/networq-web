@@ -40,11 +40,18 @@ class AppController extends AbstractController
         $nodes = $graph->getNodes();
         $res = [];
         foreach ($nodes as $node) {
+            $match = false;
+            if (strpos($node->getName(), $query) !== false) {
+                $match = true;
+            }
             if ($node->hasTag('networq:core:node')) {
                 $name = strtolower($node['networq:core:node']['name']);
                 if (strpos($name, $query) !== false) {
-                    $res[] = $node;
+                    $match = true;
                 }
+            }
+            if ($match) {
+                $res[] = $node;
             }
         }
         $data = [
