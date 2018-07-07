@@ -127,8 +127,7 @@ class AppController extends AbstractController
         }
         $yaml = null;
         if ($graph->hasNode($fqnn)) {
-            $node = $graph->getNode($fqnn);
-            $yaml = $node->toYaml();
+            $yaml = $graph->getNodeYaml($fqnn);
         }
 
 
