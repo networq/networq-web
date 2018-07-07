@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\GraphService;
@@ -65,6 +66,41 @@ class AppController extends AbstractController
             'graph' => $graph,
         ];
         return $this->render('type.html.twig', $data);
+    }
+
+    /**
+     * @Route("/nodes/new", name="node_new")
+     */
+    public function nodeNew(Request $request, SessionInterface $session)
+    {
+        $graph = $this->graphService->getGraph();
+        if ($request->getMethod()=='POST') {
+            $name = $request->request->get('node_name');
+            $name = strtolower(trim($name));
+            $fqnn = $graph->getRootPackage()->getFqpn() . ':' . $name;
+
+            if ($graph->hasNode($fqnn)) {
+                $this->get('session')->getFlashBag()->add(
+                    'warning',
+                    'A node with this name already exists: <a href="/nodes/' . $fqnn . '">' . $fqnn . '</a>'
+                );
+                return $this->redirectToRoute('node_new', ['name' => $name]);
+            }
+
+            $yaml = '';
+            $graph->persist($fqnn, $yaml);
+            return $this->redirectToRoute('node_yaml', ['fqnn' => $fqnn]);
+        }
+
+
+        $types = $graph->getTypes(); // for inline help?
+        $data = [
+            'graph' => $graph,
+            'types' => $types,
+        ];
+
+        $filename = 'node_new.html.twig';
+        return $this->render($filename, $data);
     }
 
     /**

@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+  <div class="container">
+    <form action="#" method="POST">
+      <div class="row">
+        <div class="col-md-12">
+          <div style="float: right; margin-top: 10px;">
+            <button type="submit" class="btn btn-success">Create</button>
+          </div>
+          <h1>New node</h1>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">{{ graph.getRootPackage.getFqpn() }}:</span>
+            </div>
+            <input type="text" class="form-control" name="node_name" placeholder="i.e. hello" />
+          </div>
+        </div>
+{#
+        <div class="col-md-3">
+        </div> #}
+
+      </div>
+    </form>
+  </div>
+{% endblock %}
