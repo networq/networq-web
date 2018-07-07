@@ -11,6 +11,46 @@
           </div>
           <h1>{{ fqnn }}</h1>
           <textarea name="yaml" class="ace-editor" data-mode="yaml" data-lines="30">{{yaml}}</textarea>
+
+          <br />
+          <h5>Examples</h5>
+          <h6>Alice the freelancer</h6>
+          <p>Alice is a freelancer that is active on Upwork and on GitHub with a rate of $25/hour:</p>
+<pre style="border: 1px solid; padding: 5px;"><code>networq:core:node:
+    name: Alice Alisson
+    description: Freelancer Alice, rocks at webdesign.
+    url: http://www.alice.web
+networq:github:user:
+    name: alice
+networq:upwork:freelancer:
+    id: 123456789
+networq:payment:rate:
+    price: 25
+    currency: USD
+    type: Hourly
+</code></pre>
+
+          <h6>Project X</h6>
+          <p>Project X is a project with actions, requirements and is hosted on GitHub:</p>
+<pre style="border: 1px solid; padding: 5px;"><code>networq:core:node:
+    name: Project X
+    description: Awesome Example Project.
+networq:github:repository:
+    name: project-x
+    owner: acme
+networq:git:repository:
+    url: git://git@github.com/acme/project-x.git
+    visibility: public
+    license: MIT
+networq:action:list: ~
+networq:requirement:list: ~
+</code></pre>
+
+          <h5>Links</h5>
+          <ul>
+            <li><a target="_blank" href="http://yaml.org/start.html">YAML Syntax reference</a></li>
+            <li><a target="_blank" href="https://www.networq.io/getting-started">Networq Getting Started Guide</a></li>
+
         </div>
 
         <div class="col-md-4">
@@ -35,20 +75,22 @@
             <h4>{{ type.getFqtn() }}</h4>
             <p>This type defines the following fields:</p>
             <h5>Fields: {{ type.getFields()|length }}</h5>
-            <ul>
+            <ul class="list-unstyled">
             {% for field in type.getFields() %}
               <li>{{ field.getName() }} <code>{{ field.getType() }}</code></li>
             {% endfor %}
             </ul>
 
-            <h5>Example</h5>
-            <p>You can copy/paste the following example in your node to tag it as a <code>{{ type.getFqtn() }}</code>.</p>
+            <h5>Example snippet</h5>
+            <p>You can copy/paste the following example in your node to tag it as a <code>{{ type.getFqtn() }}</code>. Then change the values based on the node you are creating.</p>
 <pre style="border: 1px solid; padding: 5px;"><code>{{ type.getFqtn() }}:{% if (type.getFields()|length) ==0 %} ~{% endif %}
 
 {% for field in type.getFields() %}
-    {{ field.getName }}:
-{% endfor %}
-            </code></pre>
+    {{ field.getName }}: <i>change_me</i>
+{% endfor %}</code></pre>
+            <p>To only tag this node as a <code>{{ type.getFqtn() }}</code>, without entering any property values, simply add the following snippet to your node:</p>
+<pre style="border: 1px solid; padding: 5px;"><code>{{ type.getFqtn() }}: ~</code></pre>
+
 
 
             <a class="btn btn-primary" href="#" onclick="typeBack('{{ type.getFqtn()|replace(':','_') }}')">Back</a>
