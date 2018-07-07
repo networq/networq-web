@@ -95,5 +95,16 @@
     {% block content %}{% endblock %}
 
     <script src="{{ asset('build/js/app.js') }}"></script>
+<script>
+function typeView(fqtn) {
+  $('#type-list').hide();
+  $('#' + fqtn).show();
+}
+function typeBack(fqtn) {
+  $('#type-list').show();
+  $('#' + fqtn).hide();
+}
+
+</script>
   </body>
 </html>

@@ -4,7 +4,7 @@
   <div class="container">
     <form action="#" method="POST">
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-8">
           <div style="float: right; margin-top: 10px;">
             <a href="{{ path('node', {'fqnn': fqnn} ) }}" class="btn btn-default">Back</a>
             <button type="submit" class="btn btn-success">Save</button>
@@ -13,10 +13,52 @@
           <textarea name="yaml" class="ace-editor" data-mode="yaml" data-lines="30">{{yaml}}</textarea>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
+          <div id="type-list">
+            <h3>Types</h3>
+            <input type="text" id="typeSearch" class="form-control" placeholder="Search..." />
+            <br />
+            <ul class="list-group" id="type-list-group">
+            {% for type in graph.types %}
+              <li class="list-group-item" data-fqtn="{{ type.getFqtn() }}">
+                <a href="#" onclick="typeView('{{ type.getFqtn()|replace(':','_') }}')">
+                  {{ type.getFqtn() }}
+                </a>
+              </li>
+            {% endfor %}
+            </ul>
+          </div>
+
+
+          {% for type in graph.types %}
+          <div id="{{ type.getFqtn()|replace(':','_') }}" style="display: none;">
+            <h4>{{ type.getFqtn() }}</h4>
+            <p>This type defines the following fields:</p>
+            <h5>Fields: {{ type.getFields()|length }}</h5>
+            <ul>
+            {% for field in type.getFields() %}
+              <li>{{ field.getName() }} <code>{{ field.getType() }}</code></li>
+            {% endfor %}
+            </ul>
+
+            <h5>Example</h5>
+            <p>You can copy/paste the following example in your node to tag it as a <code>{{ type.getFqtn() }}</code>.</p>
+<pre style="border: 1px solid; padding: 5px;"><code>{{ type.getFqtn() }}:{% if (type.getFields()|length) ==0 %} ~{% endif %}
+
+{% for field in type.getFields() %}
+    {{ field.getName }}:
+{% endfor %}
+            </code></pre>
+
+
+            <a class="btn btn-primary" href="#" onclick="typeBack('{{ type.getFqtn()|replace(':','_') }}')">Back</a>
+            <a class="btn btn-secondary" target="_blank" href="{{ path('type', {'fqtn': type.getFqtn() }) }}">Details</a>
+          </div>
+          {% endfor %}
         </div>
 
       </div>
     </form>
   </div>
+
 {% endblock %}

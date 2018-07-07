@@ -3,6 +3,9 @@
 // require('underscore');
 // require('backbone');
 var $ = require('jquery');
+
+window.$ = window.jQuery = require('jquery');
+
 // JS is equivalent to the normal "bootstrap" package
 // no need to set this to a variable, just require it
 // require('tether');
@@ -23,3 +26,19 @@ import 'brace/mode/javascript';
 import 'brace/mode/css';
 import 'brace/mode/yaml';
 import 'brace/theme/monokai';
+
+
+$("#typeSearch").keyup(function () {
+  var rows = $("#type-list-group").find("li").hide();
+  if (this.value.length) {
+      var data = this.value.split(" ");
+      $.each(data, function (i, v) {
+          rows.filter(":contains('" + v + "')").show();
+      });
+  } else rows.show();
+  // $('#itemCount').html($("#table-body").find("tr:visible").length);
+});
+
+$("#typeSearch").trigger('keyup');
+
+
