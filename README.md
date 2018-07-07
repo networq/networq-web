@@ -1,6 +1,8 @@
 Web-based Networq Viewer
 ========================
 
+[![CircleCI](https://circleci.com/gh/networq/networq-web.svg?style=svg)](https://circleci.com/gh/networq/networq-web)
+
 This is an implementation of a Networq Viewer in PHP (Symfony 4).
 
 It's using the [Networq PHP library](https://github.com/networq/networq-php) for loading and browsing Networq packages, types, nodes, etc.
