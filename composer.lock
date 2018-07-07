@@ -455,21 +455,25 @@
         },
         {
             "name": "networq/networq",
-            "version": "v1.5.1",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/networq/networq-php.git",
-                "reference": "1a09b32b41970a2b8e4629c955d5a00151082260"
+                "reference": "b345314cf1f226fa024a9c9ac1ff34b7f064ec95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/networq/networq-php/zipball/1a09b32b41970a2b8e4629c955d5a00151082260",
-                "reference": "1a09b32b41970a2b8e4629c955d5a00151082260",
+                "url": "https://api.github.com/repos/networq/networq-php/zipball/b345314cf1f226fa024a9c9ac1ff34b7f064ec95",
+                "reference": "b345314cf1f226fa024a9c9ac1ff34b7f064ec95",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1",
                 "symfony/yaml": "^4.0"
+            },
+            "require-dev": {
+                "phpro/grumphp": "^0.14.1",
+                "phpunit/phpunit": "^7"
             },
             "type": "library",
             "autoload": {
@@ -496,7 +500,7 @@
                 "networq",
                 "node"
             ],
-            "time": "2018-07-06T09:08:35+00:00"
+            "time": "2018-07-07T11:17:02+00:00"
         },
         {
             "name": "psr/cache",
