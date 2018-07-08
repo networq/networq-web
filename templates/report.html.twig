@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Report{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <script src="https://use.fontawesome.com/a1b5e5147d.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/litera/bootstrap.min.css" rel="stylesheet" integrity="sha384-+YpxMU1QQywaQtI3dMQAwIcu0vVDuOREjQPC59qblQHg9nTdcrUXMPnanUaldUnY" crossorigin="anonymous">
+    <style>
+      body {
+        overflow-y:scroll;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid" style="margin-top: 20px">
+      <div class="row">
+        <div class="col-md-3">
+          {% block navigation %}{% endblock %}
+        </div>
+        <div class="col-md-6">
+          {% block content %}{% endblock %}
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

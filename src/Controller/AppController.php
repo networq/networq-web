@@ -124,6 +124,7 @@ class AppController extends AbstractController
         $widgets = [
             'properties' => $graph->getNodeWidgets($node, 'properties'),
             'tabs' => $graph->getNodeWidgets($node, 'tabs'),
+            'reports' => $graph->getNodeWidgets($node, 'reports'),
         ];
 
         $data = [
@@ -186,6 +187,25 @@ class AppController extends AbstractController
         ];
 
         $filename = 'node_yaml.html.twig';
+        return $this->render($filename, $data);
+    }
+
+    /**
+     * @Route("/nodes/{fqnn}/reports/{fqtn}/{reportName}", name="node_report")
+     */
+    public function nodeReport($fqnn, $fqtn, $reportName)
+    {
+        $graph = $this->graphService->getGraph();
+        $node = $graph->getNode($fqnn);
+        $type = $graph->getType($fqtn);
+        $package = $type->getPackage();
+
+        $data = [
+            'node' => $node,
+            'graph' => $graph,
+        ];
+
+        $filename = '@' . $package->getFqpn() . '/' . $reportName . '.html.twig';
         return $this->render($filename, $data);
     }
 
