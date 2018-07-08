@@ -37,6 +37,9 @@ class AppController extends AbstractController
     {
         $graph = $this->graphService->getGraph();
         $query = strtolower($request->request->get('query'));
+        if (!$query) {
+            $query = '*';
+        }
         $nodes = $graph->getNodes();
         $res = [];
         foreach ($nodes as $node) {
