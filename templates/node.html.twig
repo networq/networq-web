@@ -32,8 +32,8 @@
             {% endif %}
             {% if node.isEditable() %}
             <br />
-            <a class="btn btn-secondary btn-sm" href="{{ path('node_yaml', {'fqnn': node.fqnn } ) }}">Edit YAML</a>
-            <a class="btn btn-secondary btn-sm" href="{{ path('node_edit', {'fqnn': node.fqnn } ) }}">Edit UI</a>
+            <a class="btn btn-secondary btn-sm" href="{{ path('node_yaml', {'fqnn': node.fqnn } ) }}"><i class="fa fa-edit"></i> Edit YAML</a>
+            {# <a class="btn btn-secondary btn-sm" href="{{ path('node_edit', {'fqnn': node.fqnn } ) }}">Edit UI</a> #}
             {% endif %}
             {% for report in widgets.reports %}
               <a class="btn btn-light btn-sm" href="{{ path('node_report', {'fqnn': node.fqnn, 'fqtn': report.typename, 'reportName': report.getName() } ) }}"><i class="fa fa-file"></i> {{ report.getLabel() }}</a>
