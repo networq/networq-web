@@ -18,9 +18,11 @@
           <td>{{ issue.code }}</td>
           <td>{{ issue.message }}</td>
           <td>
+            {% if issue.fqnn %}
             <a href="{{ path('node_yaml', {'fqnn': issue.fqnn } ) }}">
               {{ issue.fqnn }}
             </a>
+            {% endif %}
           </td>
         </tr>
       {% endfor %}
