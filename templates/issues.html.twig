@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+  <div class="container">
+    <h1><i class="fa fa-warn"></i> Issues <small>{{ issues|length }}</small></h1>
+
+    {% if issues|length == 0 %}
+      <p>Congratulations, all the nodes in this graph are issue-free</p>
+    {% else %}
+      <table class="table">
+        <tr>
+          <th>Code</th>
+          <th>Message</th>
+          <th>Node</th>
+        </tr>
+      {% for issue in issues %}
+        <tr>
+          <td>{{ issue.code }}</td>
+          <td>{{ issue.message }}</td>
+          <td>
+            <a href="{{ path('node_yaml', {'fqnn': issue.fqnn } ) }}">
+              {{ issue.fqnn }}
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+      </table>
+    {% endif %}
+  </div>
+{% endblock %}

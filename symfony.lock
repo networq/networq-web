@@ -1,4 +1,16 @@
 {
+    "composer/ca-bundle": {
+        "version": "1.1.1"
+    },
+    "composer/composer": {
+        "version": "1.6.5"
+    },
+    "composer/semver": {
+        "version": "1.4.2"
+    },
+    "composer/spdx-licenses": {
+        "version": "1.4.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -20,16 +32,37 @@
     "doctrine/lexer": {
         "version": "v1.0.1"
     },
+    "gitonomy/gitlib": {
+        "version": "v1.0.4"
+    },
+    "justinrainbow/json-schema": {
+        "version": "5.2.7"
+    },
     "linkorb/connector": {
         "version": "v1.0.0"
     },
+    "monolog/monolog": {
+        "version": "1.23.0"
+    },
     "networq/networq": {
         "version": "v1.0.0"
+    },
+    "phpro/grumphp": {
+        "version": "v0.14.1"
     },
     "psr/cache": {
         "version": "1.0.1"
     },
     "psr/simple-cache": {
+        "version": "1.0.1"
+    },
+    "seld/cli-prompt": {
+        "version": "1.0.3"
+    },
+    "seld/jsonlint": {
+        "version": "1.7.1"
+    },
+    "seld/phar-utils": {
         "version": "1.0.1"
     },
     "sensio/framework-extra-bundle": {
@@ -49,6 +82,15 @@
     },
     "symfony/config": {
         "version": "v4.1.0"
+    },
+    "symfony/console": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "e3868d2f4a5104f19f844fe551099a00c6562527"
+        }
     },
     "symfony/dependency-injection": {
         "version": "v4.1.0"
@@ -94,6 +136,9 @@
     },
     "symfony/polyfill-intl-icu": {
         "version": "v1.8.0"
+    },
+    "symfony/process": {
+        "version": "v4.1.1"
     },
     "symfony/property-access": {
         "version": "v4.1.0"

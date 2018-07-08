@@ -34,11 +34,25 @@
       <div class="container" style="padding-left: 5px;">
         <a class="nav-link" href="{{ path('frontpage') }}" style="color: #ffffff;"><i class="fa fa-home"></i> Networq</a>
 
-        <form class="form-inline" action="{{ path('search') }}" method="post">
-          <input name="query" type="text" style="width: 300px;" class="form-control" placeholder="search..." />
-          <button type="submit" class="btn btn-info">Search</button>
-          <a href="{{ path('node_new') }}" class="btn btn-success" style="color: #ffff; margin-left: 10px;"><i class="fa fa-plus"></i> New node</a>
-        </form>
+        {% if graph is defined %}
+          <form class="form-inline" action="{{ path('search') }}" method="post">
+            <input name="query" type="text" style="width: 300px;" class="form-control" placeholder="search..." />
+            <button type="submit" class="btn btn-info">Search</button>
+            <a href="{{ path('node_new') }}" class="btn btn-success" style="color: #ffff; margin-left: 10px;"><i class="fa fa-plus"></i> New node</a>
+
+            <a href="{{ path('issues') }}" style="margin-left: 5px">
+            {% if graph.getIssues()|length > 0 %}
+              <div style="color: red">
+                <i class="fa fa-warning"></i> {{ graph.getIssues()|length }}
+              </div>
+            {% else %}
+              <div style="color: green">
+                <i class="fa fa-check"></i>
+              </div>
+            {% endif %}
+            </a>
+          </form>
+        {% endif %}
       </div>
     </nav>
 

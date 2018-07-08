@@ -30,7 +30,7 @@ class AppController extends AbstractController
         return $this->render('graph.html.twig', $data);
     }
 
-     /**
+    /**
      * @Route("/search", name="search")
      */
     public function search(Request $request)
@@ -215,6 +215,20 @@ class AppController extends AbstractController
         $response->headers->set('Content-Type', 'text/plain');
 
         return $response;
+    }
+
+    /**
+     * @Route("/issues", name="issues")
+     */
+    public function issues()
+    {
+        $graph = $this->graphService->getGraph();
+        $issues = $graph->getIssues();
+        $data = [
+            'graph' => $graph,
+            'issues' => $issues,
+        ];
+        return $this->render('issues.html.twig', $data);
     }
 
 }
