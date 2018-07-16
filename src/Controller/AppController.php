@@ -7,6 +7,10 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\GraphService;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class AppController extends AbstractController
 {
@@ -125,12 +129,17 @@ class AppController extends AbstractController
             'properties' => $graph->getNodeWidgets($node, 'properties'),
             'tabs' => $graph->getNodeWidgets($node, 'tabs'),
             'reports' => $graph->getNodeWidgets($node, 'reports'),
+            'queries' => $graph->getNodeWidgets($node, 'queries'),
+            'actions' => $graph->getNodeWidgets($node, 'actions'),
         ];
+
+        $issues = $graph->getIssuesByFqnn($fqnn);
 
         $data = [
             'node' => $node,
             'graph' => $graph,
             'widgets' => $widgets,
+            'issues' => $issues,
         ];
 
         $filename = 'node.html.twig';
@@ -207,6 +216,61 @@ class AppController extends AbstractController
 
         $filename = '@' . $package->getFqpn() . '/' . $reportName . '.html.twig';
         return $this->render($filename, $data);
+    }
+
+    /**
+     * @Route("/nodes/{fqnn}/queries/{fqqn}", name="node_query")
+     */
+    public function nodeQuery($fqnn, $fqqn)
+    {
+        $graph = $this->graphService->getGraph();
+        $node = $graph->getNode($fqnn);
+        $query = $graph->getQuery($fqqn);
+        $data = $graph->runQuery($node, $query);
+        $json = json_encode($data, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+
+        $response = new Response($json);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    /**
+     * @Route("/nodes/{fqnn}/actions/{fqan}", name="node_action")
+     */
+    public function nodeAction($fqnn, $fqan)
+    {
+        $graph = $this->graphService->getGraph();
+        $node = $graph->getNode($fqnn);
+        $action = $graph->getWidget($fqan);
+
+        $fqqn = $action->getQueryName();
+        $query = $graph->getQuery($fqqn);
+        $data = $graph->runQuery($node, $query);
+        $json = json_encode($data, JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES);
+
+        $path = $action->getPackage()->getPath() . '/actions';
+        $filename = $path . '/' . $action->getName();
+        //exit($filename);
+
+        $process = new Process($filename);
+        $process->setTimeout(3600);
+        $process->setWorkingDirectory($path);
+        $process->setInput($json);
+        $process->run();
+
+        // executes after the command finishes
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
+        echo $process->getOutput();
+        echo $process->getErrorOutput();
+
+        exit();
+
+        // $response = new Response($json);
+        // $response->headers->set('Content-Type', 'application/json');
+        // return $response;
     }
 
     /**

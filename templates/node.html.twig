@@ -39,6 +39,10 @@
               <a class="btn btn-light btn-sm" href="{{ path('node_report', {'fqnn': node.fqnn, 'fqtn': report.typename, 'reportName': report.getName() } ) }}"><i class="fa fa-file"></i> {{ report.getLabel() }}</a>
 
             {% endfor %}
+            {% for action in widgets.actions %}
+              <a class="btn btn-light btn-sm" href="{{ path('node_action', {'fqnn': node.fqnn, 'fqan': action.getFqwn() } ) }}"><i class="fa fa-cog"></i> {{ action.getLabel() }}</a>
+
+            {% endfor %}
 
           </div>
         </div>
@@ -145,6 +149,21 @@
                 {% endfor %}
                 </ul>
               </li>
+            {% endfor %}
+            </ul>
+
+            <h4>Queries</h4>
+            <ul>
+            {% for name, widgets in widgets %}
+                {% for widget in widgets %}
+                  {% if widget.hookName=='queries' %}
+                  <li>
+                    <a href="{{ path('node_query', {'fqnn': node.fqnn, 'fqqn': widget.fqwn } ) }}">
+                      {{ widget.label }}
+                    </a>
+                  </li>
+                  {% endif %}
+                {% endfor %}
             {% endfor %}
             </ul>
 
