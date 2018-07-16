@@ -10,6 +10,11 @@ if (class_exists('AutoTune\Tuner')) {
     \AutoTune\Tuner::init($loader);
 }
 
+if (preg_match('#^/build/#', $_SERVER["REQUEST_URI"])) {
+    // Let static assets fall through to the default server
+    return false;
+}
+
 // The check is to ensure we don't use .env in production
 if (!isset($_SERVER['APP_ENV'])) {
     if (!class_exists(Dotenv::class)) {
