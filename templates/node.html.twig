@@ -1,6 +1,20 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
+
+  {% if issues %}
+    <div class="container" style="padding-top: 0px;">
+      <div class="alert alert-danger">
+        <h6>Node issues:</h6>
+        <p>This node has the following issue(s). Edit the node to resolve the issues.
+        <ul>
+        {% for issue in issues %}
+          <li>{{ issue.code }}<br /><i>{{ issue.message }}</i></li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
   <div class="jumbotron">
     <div class="container">
       <div class="row align-items-end">
@@ -30,6 +44,7 @@
                 {{ node['networq:core:node']['url'] }}</a>
               <br />
             {% endif %}
+
             {% if node.isEditable() %}
             <br />
             <a class="btn btn-secondary btn-sm" href="{{ path('node_yaml', {'fqnn': node.fqnn } ) }}"><i class="fa fa-edit"></i> Edit YAML</a>
